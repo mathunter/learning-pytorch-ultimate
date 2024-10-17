@@ -23,7 +23,7 @@ from sklearn.model_selection import train_test_split, learning_curve
 from sklearn.metrics import confusion_matrix
 
 # Constants
-RANDOM = numpy.random.default_rng()
+RANDOM = numpy.random.default_rng(1123)
 LEARNING_RATE = 0.01
 ITERATIONS = 10000
 
@@ -161,9 +161,8 @@ class NeuralNetworkFromScratch:
 
             # Calculate error using test data
             l_sum = 0
-            for j in range(len(self.x_test)):
-                x_test = self.x_test[j]
-                y_test_true = self.y_test[j]
+            for i, x_test in enumerate(self.x_test):
+                y_test_true = self.y_test[i]
                 y_test_pred = self.forward(x_test)
                 l_sum += np.square(y_test_pred - y_test_true)
             self.l_test.append(l_sum)
